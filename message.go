@@ -150,7 +150,56 @@ func decodeMessage(data []byte) []*MessageExt {
 	return msgs
 }
 
+//NAME_VALUE_SEPARATOR char 1 and 2 from java code
+var NAME_VALUE_SEPARATOR = string(rune(1))
+
+//PROPERTY_SEPARATOR property separator
+var PROPERTY_SEPARATOR = string(rune(2))
+
+//MessageProperties2String convert message properties to string
+func fix1_messageProperties2String(properties map[string]string) string {
+	ret := ""
+	for key, value := range properties {
+		ret = ret + key + NAME_VALUE_SEPARATOR + value + PROPERTY_SEPARATOR
+	}
+	return ret
+}
+
 func messageProperties2String(properties map[string]string) string {
+	stringBuilder := bytes.NewBuffer([]byte{})
+	if properties != nil && len(properties) != 0 {
+		for k, v := range properties {
+			//binary.Write(StringBuilder, binary.BigEndian, k)                  // 4
+			stringBuilder.WriteString(k);
+			//binary.Write(StringBuilder, binary.BigEndian, NameValueSeparator) // 4
+			//stringBuilder.WriteRune(rune(NameValueSeparator))
+			stringBuilder.WriteString(NAME_VALUE_SEPARATOR)
+			//binary.Write(StringBuilder, binary.BigEndian, v)                  // 4
+			stringBuilder.WriteString(v);
+			//binary.Write(StringBuilder, binary.BigEndian, PropertySeparator)  // 4
+			//stringBuilder.WriteRune(rune(PropertySeparator))
+			stringBuilder.WriteString(PROPERTY_SEPARATOR)
+		}
+	}
+	return stringBuilder.String()
+}
+
+func fix3_messageProperties2String(properties map[string]string) string {
+	stringBuilder := bytes.NewBuffer([]byte{})
+	if properties != nil && len(properties) != 0 {
+		for k, v := range properties {
+			binary.Write(stringBuilder, binary.BigEndian, k)                  // 4
+			//binary.Write(stringBuilder, binary.BigEndian, uint8(NameValueSeparator)) // 1
+			binary.Write(stringBuilder, binary.BigEndian, NAME_VALUE_SEPARATOR) // 1
+			binary.Write(stringBuilder, binary.BigEndian, v)                  // 4
+			//binary.Write(stringBuilder, binary.BigEndian, uint8(PropertySeparator))  // 1
+			binary.Write(stringBuilder, binary.BigEndian, PROPERTY_SEPARATOR)  // 1
+		}
+	}
+	return stringBuilder.String()
+}
+
+func origin_messageProperties2String(properties map[string]string) string {
 	StringBuilder := bytes.NewBuffer([]byte{})
 	if properties != nil && len(properties) != 0 {
 		for k, v := range properties {

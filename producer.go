@@ -16,6 +16,7 @@ type Producer interface {
 	Send(msg *Message) (*SendResult, error)
 	SendAsync(msg *Message, sendCallback SendCallback) error
 	SendOneway(msg *Message) error
+	SetTimeout(timeout int64)
 }
 
 // communicationMode
@@ -129,6 +130,10 @@ func (d *DefaultProducer) start(startFactory bool) (err error) {
 		err = errors.New("The producer service state not OK, maybe started once," + strconv.Itoa(d.serviceState))
 	}
 	return
+}
+
+func (d *DefaultProducer) SetTimeout(timeout int64)  {
+	d.sendMsgTimeout = timeout
 }
 
 func (d *DefaultProducer) Start() error {
@@ -389,7 +394,7 @@ func (d *DefaultProducer) sendMessage(addr string, brokerName string, msg *Messa
 
 func (d *DefaultProducer) sendMessageSync(addr string, brokerName string, msg *Message, timeoutMillis int64, remotingCommand *RemotingCommand) (sendResult *SendResult, err error) {
 	var response *RemotingCommand
-	fmt.Fprintln(os.Stderr, "msg:", msg.Topic, msg.Flag, string(msg.Body), msg.Properties)
+	//fmt.Fprintln(os.Stderr, "msg:", msg.Topic, msg.Flag, string(msg.Body), msg.Properties)
 	if response, err = d.remotingClient.invokeSync(addr, remotingCommand, timeoutMillis); err != nil {
 		fmt.Fprintln(os.Stderr, "sendMessageSync err", err)
 	}
@@ -416,7 +421,8 @@ func (d *DefaultProducer) sendMessageAsync(addr string, brokerName string, msg *
 		sendCallback()
 		if responseCommand != nil {
 			if sendResult, err = d.processSendResponse(brokerName, msg, responseCommand); sendResult == nil || err != nil {
-				fmt.Fprintln(os.Stderr, "sendResult can't be null, error ", err)
+				// TODO 这个位置代码需要重点关注
+				//fmt.Fprintln(os.Stderr, "sendResult can't be null, error ", err)
 				producer.updateFaultItem(brokerName, time.Now().Unix()-responseFuture.beginTimestamp, true)
 				return
 			} else {
