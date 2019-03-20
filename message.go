@@ -188,6 +188,19 @@ func messageProperties2String(properties map[string]string) string {
 	stringBuilder := bytes.NewBuffer([]byte{})
 	if properties != nil && len(properties) != 0 {
 		for k, v := range properties {
+			stringBuilder.Write([]byte(k))
+			stringBuilder.Write([]byte(NAME_VALUE_SEPARATOR))
+			stringBuilder.Write([]byte(v))
+			stringBuilder.Write([]byte(PROPERTY_SEPARATOR))
+		}
+	}
+	return stringBuilder.String()
+}
+
+func messageProperties2String_empty(properties map[string]string) string {
+	stringBuilder := bytes.NewBuffer([]byte{})
+	if properties != nil && len(properties) != 0 {
+		for k, v := range properties {
 			binary.Write(stringBuilder, binary.BigEndian, k)                  // 4
 			//binary.Write(stringBuilder, binary.BigEndian, uint8(NameValueSeparator)) // 1
 			binary.Write(stringBuilder, binary.BigEndian, NAME_VALUE_SEPARATOR) // 1
