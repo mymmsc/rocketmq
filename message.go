@@ -165,7 +165,7 @@ func fix1_messageProperties2String(properties map[string]string) string {
 	return ret
 }
 
-func messageProperties2String(properties map[string]string) string {
+func messageProperties2String_too_long(properties map[string]string) string {
 	stringBuilder := bytes.NewBuffer([]byte{})
 	if properties != nil && len(properties) != 0 {
 		for k, v := range properties {
@@ -184,7 +184,7 @@ func messageProperties2String(properties map[string]string) string {
 	return stringBuilder.String()
 }
 
-func fix3_messageProperties2String(properties map[string]string) string {
+func messageProperties2String(properties map[string]string) string {
 	stringBuilder := bytes.NewBuffer([]byte{})
 	if properties != nil && len(properties) != 0 {
 		for k, v := range properties {
