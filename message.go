@@ -169,7 +169,7 @@ func Properties2Bytes(properties map[string]string) []byte {
 	if len(properties) == 0 {
 		return nil
 	}
-	fmt.Printf("properties langth=%d\n", propertiesLength(properties))
+	//fmt.Printf("properties langth=%d\n", propertiesLength(properties))
 	bs, n := make([]byte, propertiesLength(properties)), 0
 	for k, v := range properties {
 		n += copy(bs[n:], k)
@@ -187,7 +187,7 @@ func Properties2Bytes(properties map[string]string) []byte {
 func propertiesLength(properties map[string]string) (size int) {
 	for k, v := range properties {
 		size += len(k) + 1 + len(v) + 1
-		fmt.Printf("pp: k=%s, v=%s\n", k, v)
+		//fmt.Printf("pp: k=%s, v=%s\n", k, v)
 	}
 	return
 }

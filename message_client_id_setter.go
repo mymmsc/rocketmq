@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/binary"
 	"os"
+	"sync"
 	"time"
 )
 
@@ -14,6 +15,7 @@ type messageClientIDSetter struct {
 	nextStartTime int64
 	stringBuilder *bytes.Buffer // ip  + pid + classloaderid + counter + time
 	buffer        *bytes.Buffer
+	mutex         *sync.Mutex
 }
 
 var stringBuilder = bytes.NewBuffer([]byte{})
@@ -30,6 +32,7 @@ var MessageClientIDSetter = messageClientIDSetter{
 	stringBuilder: bytes.NewBuffer([]byte{}), // length := 4 + 2 + 4 + 4 + 2
 	basePos:       stringBuilder.Len() * 2,
 	counter:       0,
+	mutex:new(sync.Mutex),
 }
 
 func hashCode() []byte {
@@ -48,10 +51,13 @@ func (m messageClientIDSetter) getUniqID(msg *Message) string {
 }
 
 func (m messageClientIDSetter) createUniqID() string {
+	m.mutex.Lock()
+	defer m.mutex.Unlock()
 	current := time.Now().UnixNano()
 	if current > m.nextStartTime {
 		m.setStartTime()
 	}
+	m.stringBuilder.Reset()
 	binary.Write(m.stringBuilder, binary.BigEndian, time.Now().UnixNano()-m.startTime)
 	m.counter++
 	binary.Write(m.stringBuilder, binary.BigEndian, m.counter)
