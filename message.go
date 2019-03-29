@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"strconv"
+	"strings"
 )
 
 const (
@@ -156,6 +157,59 @@ var NAME_VALUE_SEPARATOR = string(rune(NameValueSeparator))
 //PROPERTY_SEPARATOR property separator
 var PROPERTY_SEPARATOR = string(rune(PropertySeparator))
 
+
+var (
+	NameValueSep = byte(1)
+	PropertySep  = byte(2)
+	nameValueSepStr = string([]byte{NameValueSep})
+	propertySepStr  = string([]byte{PropertySep})
+)
+
+// Properties2Bytes converts properties to byte array
+func Properties2Bytes(properties map[string]string) []byte {
+	if len(properties) == 0 {
+		return nil
+	}
+
+	bs, n := make([]byte, propertiesLength(properties)), 0
+	for k, v := range properties {
+		n += copy(bs[n:], k)
+		bs[n] = NameValueSep
+		n++
+
+		n += copy(bs[n:], v)
+		bs[n] = PropertySep
+		n++
+	}
+
+	return bs
+}
+
+func propertiesLength(properties map[string]string) (size int) {
+	for k, v := range properties {
+		size += len(k) + 1 + len(v) + 1
+	}
+	return
+}
+
+// Properties2String converts properties to string
+func messageProperties2String(properties map[string]string) string {
+	return string(Properties2Bytes(properties))
+}
+
+// String2Properties converts string to map
+func String2Properties(properties string) map[string]string {
+	ret := make(map[string]string, 32)
+	for _, p := range strings.Split(properties, propertySepStr) {
+		nv := strings.Split(p, nameValueSepStr)
+		if len(nv) == 2 {
+			ret[nv[0]] = nv[1]
+		}
+	}
+
+	return ret
+}
+
 //MessageProperties2String convert message properties to string
 func fix1_messageProperties2String(properties map[string]string) string {
 	ret := ""
@@ -169,44 +223,23 @@ func messageProperties2String_too_long(properties map[string]string) string {
 	stringBuilder := bytes.NewBuffer([]byte{})
 	if properties != nil && len(properties) != 0 {
 		for k, v := range properties {
-			//binary.Write(StringBuilder, binary.BigEndian, k)                  // 4
 			stringBuilder.WriteString(k);
-			//binary.Write(StringBuilder, binary.BigEndian, NameValueSeparator) // 4
-			//stringBuilder.WriteRune(rune(NameValueSeparator))
 			stringBuilder.WriteString(NAME_VALUE_SEPARATOR)
-			//binary.Write(StringBuilder, binary.BigEndian, v)                  // 4
 			stringBuilder.WriteString(v);
-			//binary.Write(StringBuilder, binary.BigEndian, PropertySeparator)  // 4
-			//stringBuilder.WriteRune(rune(PropertySeparator))
 			stringBuilder.WriteString(PROPERTY_SEPARATOR)
 		}
 	}
 	return stringBuilder.String()
 }
 
-func messageProperties2String_old(properties map[string]string) string {
-	stringBuilder := bytes.NewBuffer([]byte{})
-	if properties != nil && len(properties) != 0 {
-		for k, v := range properties {
-			stringBuilder.Write([]byte(k))
-			stringBuilder.Write([]byte(NAME_VALUE_SEPARATOR))
-			stringBuilder.Write([]byte(v))
-			stringBuilder.Write([]byte(PROPERTY_SEPARATOR))
-		}
-	}
-	return stringBuilder.String()
-}
-
-func messageProperties2String(properties map[string]string) string {
+func messageProperties2String_error_v1(properties map[string]string) string {
 	stringBuilder := bytes.NewBuffer([]byte{})
 	if properties != nil && len(properties) != 0 {
 		for k, v := range properties {
 			binary.Write(stringBuilder, binary.BigEndian, k)                  // 4
-			//binary.Write(stringBuilder, binary.BigEndian, uint8(NameValueSeparator)) // 1
-			binary.Write(stringBuilder, binary.BigEndian, byte(NameValueSeparator)) // 1
+			binary.Write(stringBuilder, binary.BigEndian, uint8(NameValueSeparator)) // 1
 			binary.Write(stringBuilder, binary.BigEndian, v)                  // 4
-			//binary.Write(stringBuilder, binary.BigEndian, uint8(PropertySeparator))  // 1
-			binary.Write(stringBuilder, binary.BigEndian, byte(PropertySeparator))  // 1
+			binary.Write(stringBuilder, binary.BigEndian, uint8(PropertySeparator))  // 1
 		}
 	}
 	return stringBuilder.String()
