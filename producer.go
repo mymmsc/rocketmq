@@ -264,7 +264,10 @@ func (d *DefaultProducer) sendKernel(msg *Message, mq *MessageQueue, communicati
 		brokerAddr = BrokerVIPChannel(d.vipChannelEnabled, brokerAddr)
 		prevBody := msg.Body
 
-		MessageClientIDSetter.setUniqID(msg)
+		//MessageClientIDSetter.setUniqID(msg)
+		if msg.Properties[MessageConst.PropertyUniqClientMessageIdKeyidx] == "" {
+			msg.Properties[MessageConst.PropertyUniqClientMessageIdKeyidx] = CreateUniqID()
+		}
 
 		sysFlag := 0
 		if d.tryToCompressMessage(msg) {
