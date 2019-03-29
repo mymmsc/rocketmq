@@ -462,7 +462,7 @@ func (d *DefaultProducer) processSendResponse(brokerName string, msg *Message, r
 		responseHeader := response.decodeCommandCustomHeader()
 		messageQueue := NewMessageQueue(msg.Topic, brokerName, responseHeader.queueId)
 
-		sendResult = NewSendResult(sendStatus, MessageClientIDSetter.getUniqID(msg), responseHeader.msgId, messageQueue, responseHeader.queueOffset)
+		sendResult = NewSendResult(sendStatus, msg.Properties[MessageConst.PropertyUniqClientMessageIdKeyidx], responseHeader.msgId, messageQueue, responseHeader.queueOffset)
 		sendResult.transactionId = responseHeader.transactionId
 
 		pullResult, ok := response.ExtFields.(map[string]interface{})
