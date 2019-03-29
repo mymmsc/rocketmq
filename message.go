@@ -187,6 +187,7 @@ func Properties2Bytes(properties map[string]string) []byte {
 func propertiesLength(properties map[string]string) (size int) {
 	for k, v := range properties {
 		size += len(k) + 1 + len(v) + 1
+		fmt.Printf("pp: k=%s, v=%s\n", k, v)
 	}
 	return
 }
