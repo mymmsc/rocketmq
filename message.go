@@ -151,10 +151,10 @@ func decodeMessage(data []byte) []*MessageExt {
 }
 
 //NAME_VALUE_SEPARATOR char 1 and 2 from java code
-var NAME_VALUE_SEPARATOR = string(rune(1))
+var NAME_VALUE_SEPARATOR = string(rune(NameValueSeparator))
 
 //PROPERTY_SEPARATOR property separator
-var PROPERTY_SEPARATOR = string(rune(2))
+var PROPERTY_SEPARATOR = string(rune(PropertySeparator))
 
 //MessageProperties2String convert message properties to string
 func fix1_messageProperties2String(properties map[string]string) string {
@@ -184,7 +184,7 @@ func messageProperties2String_too_long(properties map[string]string) string {
 	return stringBuilder.String()
 }
 
-func messageProperties2String(properties map[string]string) string {
+func messageProperties2String_old(properties map[string]string) string {
 	stringBuilder := bytes.NewBuffer([]byte{})
 	if properties != nil && len(properties) != 0 {
 		for k, v := range properties {
@@ -197,16 +197,16 @@ func messageProperties2String(properties map[string]string) string {
 	return stringBuilder.String()
 }
 
-func messageProperties2String_empty(properties map[string]string) string {
+func messageProperties2String(properties map[string]string) string {
 	stringBuilder := bytes.NewBuffer([]byte{})
 	if properties != nil && len(properties) != 0 {
 		for k, v := range properties {
 			binary.Write(stringBuilder, binary.BigEndian, k)                  // 4
 			//binary.Write(stringBuilder, binary.BigEndian, uint8(NameValueSeparator)) // 1
-			binary.Write(stringBuilder, binary.BigEndian, NAME_VALUE_SEPARATOR) // 1
+			binary.Write(stringBuilder, binary.BigEndian, byte(NameValueSeparator)) // 1
 			binary.Write(stringBuilder, binary.BigEndian, v)                  // 4
 			//binary.Write(stringBuilder, binary.BigEndian, uint8(PropertySeparator))  // 1
-			binary.Write(stringBuilder, binary.BigEndian, PROPERTY_SEPARATOR)  // 1
+			binary.Write(stringBuilder, binary.BigEndian, byte(PropertySeparator))  // 1
 		}
 	}
 	return stringBuilder.String()
