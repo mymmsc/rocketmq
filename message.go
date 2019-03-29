@@ -112,7 +112,6 @@ func decodeMessage(data []byte) []*MessageExt {
 					return nil
 				}
 			}
-
 		}
 		binary.Read(buf, binary.BigEndian, &topicLen)
 		topic = make([]byte, 0)
@@ -170,7 +169,7 @@ func Properties2Bytes(properties map[string]string) []byte {
 	if len(properties) == 0 {
 		return nil
 	}
-
+	fmt.Printf("properties langth=%d\n", propertiesLength(properties))
 	bs, n := make([]byte, propertiesLength(properties)), 0
 	for k, v := range properties {
 		n += copy(bs[n:], k)
@@ -210,15 +209,6 @@ func String2Properties(properties string) map[string]string {
 	return ret
 }
 
-//MessageProperties2String convert message properties to string
-func fix1_messageProperties2String(properties map[string]string) string {
-	ret := ""
-	for key, value := range properties {
-		ret = ret + key + NAME_VALUE_SEPARATOR + value + PROPERTY_SEPARATOR
-	}
-	return ret
-}
-
 func messageProperties2String_too_long(properties map[string]string) string {
 	stringBuilder := bytes.NewBuffer([]byte{})
 	if properties != nil && len(properties) != 0 {
@@ -227,19 +217,6 @@ func messageProperties2String_too_long(properties map[string]string) string {
 			stringBuilder.WriteString(NAME_VALUE_SEPARATOR)
 			stringBuilder.WriteString(v);
 			stringBuilder.WriteString(PROPERTY_SEPARATOR)
-		}
-	}
-	return stringBuilder.String()
-}
-
-func messageProperties2String_error_v1(properties map[string]string) string {
-	stringBuilder := bytes.NewBuffer([]byte{})
-	if properties != nil && len(properties) != 0 {
-		for k, v := range properties {
-			binary.Write(stringBuilder, binary.BigEndian, k)                  // 4
-			binary.Write(stringBuilder, binary.BigEndian, uint8(NameValueSeparator)) // 1
-			binary.Write(stringBuilder, binary.BigEndian, v)                  // 4
-			binary.Write(stringBuilder, binary.BigEndian, uint8(PropertySeparator))  // 1
 		}
 	}
 	return stringBuilder.String()

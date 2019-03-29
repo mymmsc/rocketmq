@@ -65,6 +65,7 @@ func TestSendAsync(t *testing.T) {
 	}
 	for i := 0; i < 3; i++ {
 		msg := NewMessage(topic, []byte("Hello RocketMQ "+strconv.Itoa(i)))
+		msg.Properties["KEYS"] = "1"
 		sendCallback := func() error {
 			t.Logf("I am callback")
 			return nil
