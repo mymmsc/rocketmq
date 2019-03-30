@@ -132,7 +132,7 @@ func (d *DefaultProducer) start(startFactory bool) (err error) {
 	return
 }
 
-func (d *DefaultProducer) SetTimeout(timeout int64)  {
+func (d *DefaultProducer) SetTimeout(timeout int64) {
 	d.sendMsgTimeout = timeout
 }
 

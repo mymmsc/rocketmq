@@ -12,7 +12,7 @@ func Test(t *testing.T) {
 		fmt.Println(CreateUniqID())
 	}
 
-	s:= "a:"
+	s := "a:"
 	pid := syscall.Getpid()
 	fmt.Println(s+" Getpid", pid)
 	fmt.Println(s+" Getppid", syscall.Getppid())

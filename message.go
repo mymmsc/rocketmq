@@ -156,10 +156,9 @@ var NAME_VALUE_SEPARATOR = string(rune(NameValueSeparator))
 //PROPERTY_SEPARATOR property separator
 var PROPERTY_SEPARATOR = string(rune(PropertySeparator))
 
-
 var (
-	NameValueSep = byte(1)
-	PropertySep  = byte(2)
+	NameValueSep    = byte(1)
+	PropertySep     = byte(2)
 	nameValueSepStr = string([]byte{NameValueSep})
 	propertySepStr  = string([]byte{PropertySep})
 )
