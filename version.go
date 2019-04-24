@@ -1,1 +1,1562 @@
 package rocketmq
+
+// org.apache.rocketmq.common.MQVersion
+type RocketMQVersion = int
+
+const (
+	V3_0_0_SNAPSHOT RocketMQVersion = iota
+	V3_0_0_ALPHA1
+	V3_0_0_BETA1
+	V3_0_0_BETA2
+	V3_0_0_BETA3
+	V3_0_0_BETA4
+	V3_0_0_BETA5
+	V3_0_0_BETA6_SNAPSHOT
+	V3_0_0_BETA6
+	V3_0_0_BETA7_SNAPSHOT
+	V3_0_0_BETA7
+	V3_0_0_BETA8_SNAPSHOT
+	V3_0_0_BETA8
+	V3_0_0_BETA9_SNAPSHOT
+	V3_0_0_BETA9
+	V3_0_0_FINAL
+	V3_0_1_SNAPSHOT
+	V3_0_1
+	V3_0_2_SNAPSHOT
+	V3_0_2
+	V3_0_3_SNAPSHOT
+	V3_0_3
+	V3_0_4_SNAPSHOT
+	V3_0_4
+	V3_0_5_SNAPSHOT
+	V3_0_5
+	V3_0_6_SNAPSHOT
+	V3_0_6
+	V3_0_7_SNAPSHOT
+	V3_0_7
+	V3_0_8_SNAPSHOT
+	V3_0_8
+	V3_0_9_SNAPSHOT
+	V3_0_9
+
+	V3_0_10_SNAPSHOT
+	V3_0_10
+
+	V3_0_11_SNAPSHOT
+	V3_0_11
+
+	V3_0_12_SNAPSHOT
+	V3_0_12
+
+	V3_0_13_SNAPSHOT
+	V3_0_13
+
+	V3_0_14_SNAPSHOT
+	V3_0_14
+
+	V3_0_15_SNAPSHOT
+	V3_0_15
+
+	V3_1_0_SNAPSHOT
+	V3_1_0
+
+	V3_1_1_SNAPSHOT
+	V3_1_1
+
+	V3_1_2_SNAPSHOT
+	V3_1_2
+
+	V3_1_3_SNAPSHOT
+	V3_1_3
+
+	V3_1_4_SNAPSHOT
+	V3_1_4
+
+	V3_1_5_SNAPSHOT
+	V3_1_5
+
+	V3_1_6_SNAPSHOT
+	V3_1_6
+
+	V3_1_7_SNAPSHOT
+	V3_1_7
+
+	V3_1_8_SNAPSHOT
+	V3_1_8
+
+	V3_1_9_SNAPSHOT
+	V3_1_9
+
+	V3_2_0_SNAPSHOT
+	V3_2_0
+
+	V3_2_1_SNAPSHOT
+	V3_2_1
+
+	V3_2_2_SNAPSHOT
+	V3_2_2
+	V3_2_3_SNAPSHOT
+	V3_2_3
+	V3_2_4_SNAPSHOT
+	V3_2_4
+
+	V3_2_5_SNAPSHOT
+	V3_2_5
+
+	V3_2_6_SNAPSHOT
+	V3_2_6
+
+	V3_2_7_SNAPSHOT
+	V3_2_7
+
+	V3_2_8_SNAPSHOT
+	V3_2_8
+
+	V3_2_9_SNAPSHOT
+	V3_2_9
+
+	V3_3_1_SNAPSHOT
+	V3_3_1
+
+	V3_3_2_SNAPSHOT
+	V3_3_2
+
+	V3_3_3_SNAPSHOT
+	V3_3_3
+
+	V3_3_4_SNAPSHOT
+	V3_3_4
+
+	V3_3_5_SNAPSHOT
+	V3_3_5
+
+	V3_3_6_SNAPSHOT
+	V3_3_6
+
+	V3_3_7_SNAPSHOT
+	V3_3_7
+
+	V3_3_8_SNAPSHOT
+	V3_3_8
+
+	V3_3_9_SNAPSHOT
+	V3_3_9
+
+	V3_4_1_SNAPSHOT
+	V3_4_1
+
+	V3_4_2_SNAPSHOT
+	V3_4_2
+
+	V3_4_3_SNAPSHOT
+	V3_4_3
+
+	V3_4_4_SNAPSHOT
+	V3_4_4
+
+	V3_4_5_SNAPSHOT
+	V3_4_5
+
+	V3_4_6_SNAPSHOT
+	V3_4_6
+
+	V3_4_7_SNAPSHOT
+	V3_4_7
+
+	V3_4_8_SNAPSHOT
+	V3_4_8
+
+	V3_4_9_SNAPSHOT
+	V3_4_9
+	V3_5_1_SNAPSHOT
+	V3_5_1
+
+	V3_5_2_SNAPSHOT
+	V3_5_2
+
+	V3_5_3_SNAPSHOT
+	V3_5_3
+
+	V3_5_4_SNAPSHOT
+	V3_5_4
+
+	V3_5_5_SNAPSHOT
+	V3_5_5
+
+	V3_5_6_SNAPSHOT
+	V3_5_6
+
+	V3_5_7_SNAPSHOT
+	V3_5_7
+
+	V3_5_8_SNAPSHOT
+	V3_5_8
+
+	V3_5_9_SNAPSHOT
+	V3_5_9
+
+	V3_6_1_SNAPSHOT
+	V3_6_1
+
+	V3_6_2_SNAPSHOT
+	V3_6_2
+
+	V3_6_3_SNAPSHOT
+	V3_6_3
+
+	V3_6_4_SNAPSHOT
+	V3_6_4
+
+	V3_6_5_SNAPSHOT
+	V3_6_5
+
+	V3_6_6_SNAPSHOT
+	V3_6_6
+
+	V3_6_7_SNAPSHOT
+	V3_6_7
+
+	V3_6_8_SNAPSHOT
+	V3_6_8
+
+	V3_6_9_SNAPSHOT
+	V3_6_9
+
+	V3_7_1_SNAPSHOT
+	V3_7_1
+
+	V3_7_2_SNAPSHOT
+	V3_7_2
+
+	V3_7_3_SNAPSHOT
+	V3_7_3
+
+	V3_7_4_SNAPSHOT
+	V3_7_4
+
+	V3_7_5_SNAPSHOT
+	V3_7_5
+
+	V3_7_6_SNAPSHOT
+	V3_7_6
+
+	V3_7_7_SNAPSHOT
+	V3_7_7
+
+	V3_7_8_SNAPSHOT
+	V3_7_8
+
+	V3_7_9_SNAPSHOT
+	V3_7_9
+
+	V3_8_1_SNAPSHOT
+	V3_8_1
+
+	V3_8_2_SNAPSHOT
+	V3_8_2
+
+	V3_8_3_SNAPSHOT
+	V3_8_3
+
+	V3_8_4_SNAPSHOT
+	V3_8_4
+
+	V3_8_5_SNAPSHOT
+	V3_8_5
+
+	V3_8_6_SNAPSHOT
+	V3_8_6
+
+	V3_8_7_SNAPSHOT
+	V3_8_7
+
+	V3_8_8_SNAPSHOT
+	V3_8_8
+
+	V3_8_9_SNAPSHOT
+	V3_8_9
+
+	V3_9_1_SNAPSHOT
+	V3_9_1
+
+	V3_9_2_SNAPSHOT
+	V3_9_2
+
+	V3_9_3_SNAPSHOT
+	V3_9_3
+
+	V3_9_4_SNAPSHOT
+	V3_9_4
+
+	V3_9_5_SNAPSHOT
+	V3_9_5
+
+	V3_9_6_SNAPSHOT
+	V3_9_6
+
+	V3_9_7_SNAPSHOT
+	V3_9_7
+
+	V3_9_8_SNAPSHOT
+	V3_9_8
+
+	V3_9_9_SNAPSHOT
+	V3_9_9
+
+	V4_0_0_SNAPSHOT
+	V4_0_0
+
+	V4_0_1_SNAPSHOT
+	V4_0_1
+
+	V4_0_2_SNAPSHOT
+	V4_0_2
+
+	V4_0_3_SNAPSHOT
+	V4_0_3
+
+	V4_0_4_SNAPSHOT
+	V4_0_4
+
+	V4_0_5_SNAPSHOT
+	V4_0_5
+
+	V4_0_6_SNAPSHOT
+	V4_0_6
+
+	V4_0_7_SNAPSHOT
+	V4_0_7
+
+	V4_0_8_SNAPSHOT
+	V4_0_8
+
+	V4_0_9_SNAPSHOT
+	V4_0_9
+
+	V4_1_0_SNAPSHOT
+	V4_1_0
+
+	V4_1_1_SNAPSHOT
+	V4_1_1
+
+	V4_1_2_SNAPSHOT
+	V4_1_2
+
+	V4_1_3_SNAPSHOT
+	V4_1_3
+
+	V4_1_4_SNAPSHOT
+	V4_1_4
+
+	V4_1_5_SNAPSHOT
+	V4_1_5
+
+	V4_1_6_SNAPSHOT
+	V4_1_6
+
+	V4_1_7_SNAPSHOT
+	V4_1_7
+
+	V4_1_8_SNAPSHOT
+	V4_1_8
+
+	V4_1_9_SNAPSHOT
+	V4_1_9
+
+	V4_2_0_SNAPSHOT
+	V4_2_0
+
+	V4_2_1_SNAPSHOT
+	V4_2_1
+
+	V4_2_2_SNAPSHOT
+	V4_2_2
+
+	V4_2_3_SNAPSHOT
+	V4_2_3
+
+	V4_2_4_SNAPSHOT
+	V4_2_4
+
+	V4_2_5_SNAPSHOT
+	V4_2_5
+
+	V4_2_6_SNAPSHOT
+	V4_2_6
+
+	V4_2_7_SNAPSHOT
+	V4_2_7
+
+	V4_2_8_SNAPSHOT
+	V4_2_8
+
+	V4_2_9_SNAPSHOT
+	V4_2_9
+
+	V4_3_0_SNAPSHOT
+	V4_3_0
+
+	V4_3_1_SNAPSHOT
+	V4_3_1
+
+	V4_3_2_SNAPSHOT
+	V4_3_2
+
+	V4_3_3_SNAPSHOT
+	V4_3_3
+
+	V4_3_4_SNAPSHOT
+	V4_3_4
+
+	V4_3_5_SNAPSHOT
+	V4_3_5
+
+	V4_3_6_SNAPSHOT
+	V4_3_6
+
+	V4_3_7_SNAPSHOT
+	V4_3_7
+
+	V4_3_8_SNAPSHOT
+	V4_3_8
+
+	V4_3_9_SNAPSHOT
+	V4_3_9
+
+	V4_4_0_SNAPSHOT
+	V4_4_0
+
+	V4_4_1_SNAPSHOT
+	V4_4_1
+
+	V4_4_2_SNAPSHOT
+	V4_4_2
+
+	V4_4_3_SNAPSHOT
+	V4_4_3
+
+	V4_4_4_SNAPSHOT
+	V4_4_4
+
+	V4_4_5_SNAPSHOT
+	V4_4_5
+
+	V4_4_6_SNAPSHOT
+	V4_4_6
+
+	V4_4_7_SNAPSHOT
+	V4_4_7
+
+	V4_4_8_SNAPSHOT
+	V4_4_8
+
+	V4_4_9_SNAPSHOT
+	V4_4_9
+
+	V4_5_0_SNAPSHOT
+	V4_5_0
+
+	V4_5_1_SNAPSHOT
+	V4_5_1
+
+	V4_5_2_SNAPSHOT
+	V4_5_2
+
+	V4_5_3_SNAPSHOT
+	V4_5_3
+
+	V4_5_4_SNAPSHOT
+	V4_5_4
+
+	V4_5_5_SNAPSHOT
+	V4_5_5
+
+	V4_5_6_SNAPSHOT
+	V4_5_6
+
+	V4_5_7_SNAPSHOT
+	V4_5_7
+
+	V4_5_8_SNAPSHOT
+	V4_5_8
+
+	V4_5_9_SNAPSHOT
+	V4_5_9
+
+	V4_6_0_SNAPSHOT
+	V4_6_0
+
+	V4_6_1_SNAPSHOT
+	V4_6_1
+
+	V4_6_2_SNAPSHOT
+	V4_6_2
+
+	V4_6_3_SNAPSHOT
+	V4_6_3
+
+	V4_6_4_SNAPSHOT
+	V4_6_4
+
+	V4_6_5_SNAPSHOT
+	V4_6_5
+
+	V4_6_6_SNAPSHOT
+	V4_6_6
+
+	V4_6_7_SNAPSHOT
+	V4_6_7
+
+	V4_6_8_SNAPSHOT
+	V4_6_8
+
+	V4_6_9_SNAPSHOT
+	V4_6_9
+
+	V4_7_0_SNAPSHOT
+	V4_7_0
+
+	V4_7_1_SNAPSHOT
+	V4_7_1
+
+	V4_7_2_SNAPSHOT
+	V4_7_2
+
+	V4_7_3_SNAPSHOT
+	V4_7_3
+
+	V4_7_4_SNAPSHOT
+	V4_7_4
+
+	V4_7_5_SNAPSHOT
+	V4_7_5
+
+	V4_7_6_SNAPSHOT
+	V4_7_6
+
+	V4_7_7_SNAPSHOT
+	V4_7_7
+
+	V4_7_8_SNAPSHOT
+	V4_7_8
+
+	V4_7_9_SNAPSHOT
+	V4_7_9
+
+	V4_8_0_SNAPSHOT
+	V4_8_0
+
+	V4_8_1_SNAPSHOT
+	V4_8_1
+
+	V4_8_2_SNAPSHOT
+	V4_8_2
+
+	V4_8_3_SNAPSHOT
+	V4_8_3
+
+	V4_8_4_SNAPSHOT
+	V4_8_4
+
+	V4_8_5_SNAPSHOT
+	V4_8_5
+
+	V4_8_6_SNAPSHOT
+	V4_8_6
+
+	V4_8_7_SNAPSHOT
+	V4_8_7
+
+	V4_8_8_SNAPSHOT
+	V4_8_8
+
+	V4_8_9_SNAPSHOT
+	V4_8_9
+
+	V4_9_0_SNAPSHOT
+	V4_9_0
+
+	V4_9_1_SNAPSHOT
+	V4_9_1
+
+	V4_9_2_SNAPSHOT
+	V4_9_2
+
+	V4_9_3_SNAPSHOT
+	V4_9_3
+
+	V4_9_4_SNAPSHOT
+	V4_9_4
+
+	V4_9_5_SNAPSHOT
+	V4_9_5
+
+	V4_9_6_SNAPSHOT
+	V4_9_6
+
+	V4_9_7_SNAPSHOT
+	V4_9_7
+
+	V4_9_8_SNAPSHOT
+	V4_9_8
+
+	V4_9_9_SNAPSHOT
+	V4_9_9
+
+	V5_0_0_SNAPSHOT
+	V5_0_0
+
+	V5_0_1_SNAPSHOT
+	V5_0_1
+
+	V5_0_2_SNAPSHOT
+	V5_0_2
+
+	V5_0_3_SNAPSHOT
+	V5_0_3
+
+	V5_0_4_SNAPSHOT
+	V5_0_4
+
+	V5_0_5_SNAPSHOT
+	V5_0_5
+
+	V5_0_6_SNAPSHOT
+	V5_0_6
+
+	V5_0_7_SNAPSHOT
+	V5_0_7
+
+	V5_0_8_SNAPSHOT
+	V5_0_8
+
+	V5_0_9_SNAPSHOT
+	V5_0_9
+
+	V5_1_0_SNAPSHOT
+	V5_1_0
+
+	V5_1_1_SNAPSHOT
+	V5_1_1
+
+	V5_1_2_SNAPSHOT
+	V5_1_2
+
+	V5_1_3_SNAPSHOT
+	V5_1_3
+
+	V5_1_4_SNAPSHOT
+	V5_1_4
+
+	V5_1_5_SNAPSHOT
+	V5_1_5
+
+	V5_1_6_SNAPSHOT
+	V5_1_6
+
+	V5_1_7_SNAPSHOT
+	V5_1_7
+
+	V5_1_8_SNAPSHOT
+	V5_1_8
+
+	V5_1_9_SNAPSHOT
+	V5_1_9
+
+	V5_2_0_SNAPSHOT
+	V5_2_0
+
+	V5_2_1_SNAPSHOT
+	V5_2_1
+
+	V5_2_2_SNAPSHOT
+	V5_2_2
+
+	V5_2_3_SNAPSHOT
+	V5_2_3
+
+	V5_2_4_SNAPSHOT
+	V5_2_4
+
+	V5_2_5_SNAPSHOT
+	V5_2_5
+
+	V5_2_6_SNAPSHOT
+	V5_2_6
+
+	V5_2_7_SNAPSHOT
+	V5_2_7
+
+	V5_2_8_SNAPSHOT
+	V5_2_8
+
+	V5_2_9_SNAPSHOT
+	V5_2_9
+
+	V5_3_0_SNAPSHOT
+	V5_3_0
+
+	V5_3_1_SNAPSHOT
+	V5_3_1
+
+	V5_3_2_SNAPSHOT
+	V5_3_2
+
+	V5_3_3_SNAPSHOT
+	V5_3_3
+
+	V5_3_4_SNAPSHOT
+	V5_3_4
+
+	V5_3_5_SNAPSHOT
+	V5_3_5
+
+	V5_3_6_SNAPSHOT
+	V5_3_6
+
+	V5_3_7_SNAPSHOT
+	V5_3_7
+
+	V5_3_8_SNAPSHOT
+	V5_3_8
+
+	V5_3_9_SNAPSHOT
+	V5_3_9
+
+	V5_4_0_SNAPSHOT
+	V5_4_0
+
+	V5_4_1_SNAPSHOT
+	V5_4_1
+
+	V5_4_2_SNAPSHOT
+	V5_4_2
+
+	V5_4_3_SNAPSHOT
+	V5_4_3
+
+	V5_4_4_SNAPSHOT
+	V5_4_4
+
+	V5_4_5_SNAPSHOT
+	V5_4_5
+
+	V5_4_6_SNAPSHOT
+	V5_4_6
+
+	V5_4_7_SNAPSHOT
+	V5_4_7
+
+	V5_4_8_SNAPSHOT
+	V5_4_8
+
+	V5_4_9_SNAPSHOT
+	V5_4_9
+
+	V5_5_0_SNAPSHOT
+	V5_5_0
+
+	V5_5_1_SNAPSHOT
+	V5_5_1
+
+	V5_5_2_SNAPSHOT
+	V5_5_2
+
+	V5_5_3_SNAPSHOT
+	V5_5_3
+
+	V5_5_4_SNAPSHOT
+	V5_5_4
+
+	V5_5_5_SNAPSHOT
+	V5_5_5
+
+	V5_5_6_SNAPSHOT
+	V5_5_6
+
+	V5_5_7_SNAPSHOT
+	V5_5_7
+
+	V5_5_8_SNAPSHOT
+	V5_5_8
+
+	V5_5_9_SNAPSHOT
+	V5_5_9
+
+	V5_6_0_SNAPSHOT
+	V5_6_0
+
+	V5_6_1_SNAPSHOT
+	V5_6_1
+
+	V5_6_2_SNAPSHOT
+	V5_6_2
+
+	V5_6_3_SNAPSHOT
+	V5_6_3
+
+	V5_6_4_SNAPSHOT
+	V5_6_4
+
+	V5_6_5_SNAPSHOT
+	V5_6_5
+
+	V5_6_6_SNAPSHOT
+	V5_6_6
+
+	V5_6_7_SNAPSHOT
+	V5_6_7
+
+	V5_6_8_SNAPSHOT
+	V5_6_8
+
+	V5_6_9_SNAPSHOT
+	V5_6_9
+
+	V5_7_0_SNAPSHOT
+	V5_7_0
+
+	V5_7_1_SNAPSHOT
+	V5_7_1
+
+	V5_7_2_SNAPSHOT
+	V5_7_2
+
+	V5_7_3_SNAPSHOT
+	V5_7_3
+
+	V5_7_4_SNAPSHOT
+	V5_7_4
+
+	V5_7_5_SNAPSHOT
+	V5_7_5
+
+	V5_7_6_SNAPSHOT
+	V5_7_6
+
+	V5_7_7_SNAPSHOT
+	V5_7_7
+
+	V5_7_8_SNAPSHOT
+	V5_7_8
+
+	V5_7_9_SNAPSHOT
+	V5_7_9
+
+	V5_8_0_SNAPSHOT
+	V5_8_0
+
+	V5_8_1_SNAPSHOT
+	V5_8_1
+
+	V5_8_2_SNAPSHOT
+	V5_8_2
+
+	V5_8_3_SNAPSHOT
+	V5_8_3
+
+	V5_8_4_SNAPSHOT
+	V5_8_4
+
+	V5_8_5_SNAPSHOT
+	V5_8_5
+
+	V5_8_6_SNAPSHOT
+	V5_8_6
+
+	V5_8_7_SNAPSHOT
+	V5_8_7
+
+	V5_8_8_SNAPSHOT
+	V5_8_8
+
+	V5_8_9_SNAPSHOT
+	V5_8_9
+
+	V5_9_0_SNAPSHOT
+	V5_9_0
+
+	V5_9_1_SNAPSHOT
+	V5_9_1
+
+	V5_9_2_SNAPSHOT
+	V5_9_2
+
+	V5_9_3_SNAPSHOT
+	V5_9_3
+
+	V5_9_4_SNAPSHOT
+	V5_9_4
+
+	V5_9_5_SNAPSHOT
+	V5_9_5
+
+	V5_9_6_SNAPSHOT
+	V5_9_6
+
+	V5_9_7_SNAPSHOT
+	V5_9_7
+
+	V5_9_8_SNAPSHOT
+	V5_9_8
+
+	V5_9_9_SNAPSHOT
+	V5_9_9
+	HIGHER_VERSION
+)
+
+var (
+	str_version = []string {
+		"V3.0.0-SNAPSHOT",
+		"V3.0.0-ALPHA1",
+		"V3.0.0-BETA1",
+		"V3.0.0-BETA2",
+		"V3.0.0-BETA3",
+		"V3.0.0-BETA4",
+		"V3.0.0-BETA5",
+		"V3.0.0-BETA6-SNAPSHOT",
+		"V3.0.0-BETA6",
+		"V3.0.0-BETA7-SNAPSHOT",
+		"V3.0.0-BETA7",
+		"V3.0.0-BETA8-SNAPSHOT",
+		"V3.0.0-BETA8",
+		"V3.0.0-BETA9-SNAPSHOT",
+		"V3.0.0-BETA9",
+		"V3.0.0-FINAL",
+		"V3.0.1-SNAPSHOT",
+		"V3.0.1",
+		"V3.0.2-SNAPSHOT",
+		"V3.0.2",
+		"V3.0.3-SNAPSHOT",
+		"V3.0.3",
+		"V3.0.4-SNAPSHOT",
+		"V3.0.4",
+		"V3.0.5-SNAPSHOT",
+		"V3.0.5",
+		"V3.0.6-SNAPSHOT",
+		"V3.0.6",
+		"V3.0.7-SNAPSHOT",
+		"V3.0.7",
+		"V3.0.8-SNAPSHOT",
+		"V3.0.8",
+		"V3.0.9-SNAPSHOT",
+		"V3.0.9",
+
+		"V3.0.10-SNAPSHOT",
+		"V3.0.10",
+
+		"V3.0.11-SNAPSHOT",
+		"V3.0.11",
+
+		"V3.0.12-SNAPSHOT",
+		"V3.0.12",
+
+		"V3.0.13-SNAPSHOT",
+		"V3.0.13",
+
+		"V3.0.14-SNAPSHOT",
+		"V3.0.14",
+
+		"V3.0.15-SNAPSHOT",
+		"V3.0.15",
+
+		"V3.1.0-SNAPSHOT",
+		"V3.1.0",
+
+		"V3.1.1-SNAPSHOT",
+		"V3.1.1",
+
+		"V3.1.2-SNAPSHOT",
+		"V3.1.2",
+
+		"V3.1.3-SNAPSHOT",
+		"V3.1.3",
+
+		"V3.1.4-SNAPSHOT",
+		"V3.1.4",
+
+		"V3.1.5-SNAPSHOT",
+		"V3.1.5",
+
+		"V3.1.6-SNAPSHOT",
+		"V3.1.6",
+
+		"V3.1.7-SNAPSHOT",
+		"V3.1.7",
+
+		"V3.1.8-SNAPSHOT",
+		"V3.1.8",
+
+		"V3.1.9-SNAPSHOT",
+		"V3.1.9",
+
+		"V3.2.0-SNAPSHOT",
+		"V3.2.0",
+
+		"V3.2.1-SNAPSHOT",
+		"V3.2.1",
+
+		"V3.2.2-SNAPSHOT",
+		"V3.2.2",
+		"V3.2.3-SNAPSHOT",
+		"V3.2.3",
+		"V3.2.4-SNAPSHOT",
+		"V3.2.4",
+
+		"V3.2.5-SNAPSHOT",
+		"V3.2.5",
+
+		"V3.2.6-SNAPSHOT",
+		"V3.2.6",
+
+		"V3.2.7-SNAPSHOT",
+		"V3.2.7",
+
+		"V3.2.8-SNAPSHOT",
+		"V3.2.8",
+
+		"V3.2.9-SNAPSHOT",
+		"V3.2.9",
+
+		"V3.3.1-SNAPSHOT",
+		"V3.3.1",
+
+		"V3.3.2-SNAPSHOT",
+		"V3.3.2",
+
+		"V3.3.3-SNAPSHOT",
+		"V3.3.3",
+
+		"V3.3.4-SNAPSHOT",
+		"V3.3.4",
+
+		"V3.3.5-SNAPSHOT",
+		"V3.3.5",
+
+		"V3.3.6-SNAPSHOT",
+		"V3.3.6",
+
+		"V3.3.7-SNAPSHOT",
+		"V3.3.7",
+
+		"V3.3.8-SNAPSHOT",
+		"V3.3.8",
+
+		"V3.3.9-SNAPSHOT",
+		"V3.3.9",
+
+		"V3.4.1-SNAPSHOT",
+		"V3.4.1",
+
+		"V3.4.2-SNAPSHOT",
+		"V3.4.2",
+		"V3.4.3-SNAPSHOT",
+		"V3.4.3",
+		"V3.4.4-SNAPSHOT",
+		"V3.4.4",
+		"V3.4.5-SNAPSHOT",
+		"V3.4.5",
+		"V3.4.6-SNAPSHOT",
+		"V3.4.6",
+		"V3.4.7-SNAPSHOT",
+		"V3.4.7",
+		"V3.4.8-SNAPSHOT",
+		"V3.4.8",
+		"V3.4.9-SNAPSHOT",
+		"V3.4.9",
+		"V3.5.1-SNAPSHOT",
+		"V3.5.1",
+		"V3.5.2-SNAPSHOT",
+		"V3.5.2",
+		"V3.5.3-SNAPSHOT",
+		"V3.5.3",
+		"V3.5.4-SNAPSHOT",
+		"V3.5.4",
+		"V3.5.5-SNAPSHOT",
+		"V3.5.5",
+		"V3.5.6-SNAPSHOT",
+		"V3.5.6",
+		"V3.5.7-SNAPSHOT",
+		"V3.5.7",
+		"V3.5.8-SNAPSHOT",
+		"V3.5.8",
+		"V3.5.9-SNAPSHOT",
+		"V3.5.9",
+		"V3.6.1-SNAPSHOT",
+		"V3.6.1",
+		"V3.6.2-SNAPSHOT",
+		"V3.6.2",
+		"V3.6.3-SNAPSHOT",
+		"V3.6.3",
+		"V3.6.4-SNAPSHOT",
+		"V3.6.4",
+		"V3.6.5-SNAPSHOT",
+		"V3.6.5",
+		"V3.6.6-SNAPSHOT",
+		"V3.6.6",
+		"V3.6.7-SNAPSHOT",
+		"V3.6.7",
+		"V3.6.8-SNAPSHOT",
+		"V3.6.8",
+		"V3.6.9-SNAPSHOT",
+		"V3.6.9",
+		"V3.7.1-SNAPSHOT",
+		"V3.7.1",
+		"V3.7.2-SNAPSHOT",
+		"V3.7.2",
+		"V3.7.3-SNAPSHOT",
+		"V3.7.3",
+		"V3.7.4-SNAPSHOT",
+		"V3.7.4",
+		"V3.7.5-SNAPSHOT",
+		"V3.7.5",
+		"V3.7.6-SNAPSHOT",
+		"V3.7.6",
+		"V3.7.7-SNAPSHOT",
+		"V3.7.7",
+		"V3.7.8-SNAPSHOT",
+		"V3.7.8",
+		"V3.7.9-SNAPSHOT",
+		"V3.7.9",
+		"V3.8.1-SNAPSHOT",
+		"V3.8.1",
+		"V3.8.2-SNAPSHOT",
+		"V3.8.2",
+		"V3.8.3-SNAPSHOT",
+		"V3.8.3",
+		"V3.8.4-SNAPSHOT",
+		"V3.8.4",
+		"V3.8.5-SNAPSHOT",
+		"V3.8.5",
+		"V3.8.6-SNAPSHOT",
+		"V3.8.6",
+		"V3.8.7-SNAPSHOT",
+		"V3.8.7",
+		"V3.8.8-SNAPSHOT",
+		"V3.8.8",
+		"V3.8.9-SNAPSHOT",
+		"V3.8.9",
+		"V3.9.1-SNAPSHOT",
+		"V3.9.1",
+		"V3.9.2-SNAPSHOT",
+		"V3.9.2",
+		"V3.9.3-SNAPSHOT",
+		"V3.9.3",
+		"V3.9.4-SNAPSHOT",
+		"V3.9.4",
+		"V3.9.5-SNAPSHOT",
+		"V3.9.5",
+		"V3.9.6-SNAPSHOT",
+		"V3.9.6",
+		"V3.9.7-SNAPSHOT",
+		"V3.9.7",
+		"V3.9.8-SNAPSHOT",
+		"V3.9.8",
+		"V3.9.9-SNAPSHOT",
+		"V3.9.9",
+		"V4.0.0-SNAPSHOT",
+		"V4.0.0",
+		"V4.0.1-SNAPSHOT",
+		"V4.0.1",
+		"V4.0.2-SNAPSHOT",
+		"V4.0.2",
+		"V4.0.3-SNAPSHOT",
+		"V4.0.3",
+		"V4.0.4-SNAPSHOT",
+		"V4.0.4",
+		"V4.0.5-SNAPSHOT",
+		"V4.0.5",
+		"V4.0.6-SNAPSHOT",
+		"V4.0.6",
+		"V4.0.7-SNAPSHOT",
+		"V4.0.7",
+		"V4.0.8-SNAPSHOT",
+		"V4.0.8",
+		"V4.0.9-SNAPSHOT",
+		"V4.0.9",
+		"V4.1.0-SNAPSHOT",
+		"V4.1.0",
+		"V4.1.1-SNAPSHOT",
+		"V4.1.1",
+		"V4.1.2-SNAPSHOT",
+		"V4.1.2",
+		"V4.1.3-SNAPSHOT",
+		"V4.1.3",
+		"V4.1.4-SNAPSHOT",
+		"V4.1.4",
+		"V4.1.5-SNAPSHOT",
+		"V4.1.5",
+		"V4.1.6-SNAPSHOT",
+		"V4.1.6",
+		"V4.1.7-SNAPSHOT",
+		"V4.1.7",
+		"V4.1.8-SNAPSHOT",
+		"V4.1.8",
+		"V4.1.9-SNAPSHOT",
+		"V4.1.9",
+		"V4.2.0-SNAPSHOT",
+		"V4.2.0",
+		"V4.2.1-SNAPSHOT",
+		"V4.2.1",
+		"V4.2.2-SNAPSHOT",
+		"V4.2.2",
+		"V4.2.3-SNAPSHOT",
+		"V4.2.3",
+		"V4.2.4-SNAPSHOT",
+		"V4.2.4",
+		"V4.2.5-SNAPSHOT",
+		"V4.2.5",
+		"V4.2.6-SNAPSHOT",
+		"V4.2.6",
+		"V4.2.7-SNAPSHOT",
+		"V4.2.7",
+		"V4.2.8-SNAPSHOT",
+		"V4.2.8",
+		"V4.2.9-SNAPSHOT",
+		"V4.2.9",
+		"V4.3.0-SNAPSHOT",
+		"V4.3.0",
+		"V4.3.1-SNAPSHOT",
+		"V4.3.1",
+		"V4.3.2-SNAPSHOT",
+		"V4.3.2",
+		"V4.3.3-SNAPSHOT",
+		"V4.3.3",
+		"V4.3.4-SNAPSHOT",
+		"V4.3.4",
+		"V4.3.5-SNAPSHOT",
+		"V4.3.5",
+		"V4.3.6-SNAPSHOT",
+		"V4.3.6",
+		"V4.3.7-SNAPSHOT",
+		"V4.3.7",
+		"V4.3.8-SNAPSHOT",
+		"V4.3.8",
+		"V4.3.9-SNAPSHOT",
+		"V4.3.9",
+		"V4.4.0-SNAPSHOT",
+		"V4.4.0",
+		"V4.4.1-SNAPSHOT",
+		"V4.4.1",
+		"V4.4.2-SNAPSHOT",
+		"V4.4.2",
+		"V4.4.3-SNAPSHOT",
+		"V4.4.3",
+		"V4.4.4-SNAPSHOT",
+		"V4.4.4",
+		"V4.4.5-SNAPSHOT",
+		"V4.4.5",
+		"V4.4.6-SNAPSHOT",
+		"V4.4.6",
+		"V4.4.7-SNAPSHOT",
+		"V4.4.7",
+		"V4.4.8-SNAPSHOT",
+		"V4.4.8",
+		"V4.4.9-SNAPSHOT",
+		"V4.4.9",
+		"V4.5.0-SNAPSHOT",
+		"V4.5.0",
+		"V4.5.1-SNAPSHOT",
+		"V4.5.1",
+		"V4.5.2-SNAPSHOT",
+		"V4.5.2",
+		"V4.5.3-SNAPSHOT",
+		"V4.5.3",
+		"V4.5.4-SNAPSHOT",
+		"V4.5.4",
+		"V4.5.5-SNAPSHOT",
+		"V4.5.5",
+		"V4.5.6-SNAPSHOT",
+		"V4.5.6",
+		"V4.5.7-SNAPSHOT",
+		"V4.5.7",
+		"V4.5.8-SNAPSHOT",
+		"V4.5.8",
+		"V4.5.9-SNAPSHOT",
+		"V4.5.9",
+		"V4.6.0-SNAPSHOT",
+		"V4.6.0",
+		"V4.6.1-SNAPSHOT",
+		"V4.6.1",
+		"V4.6.2-SNAPSHOT",
+		"V4.6.2",
+		"V4.6.3-SNAPSHOT",
+		"V4.6.3",
+		"V4.6.4-SNAPSHOT",
+		"V4.6.4",
+		"V4.6.5-SNAPSHOT",
+		"V4.6.5",
+		"V4.6.6-SNAPSHOT",
+		"V4.6.6",
+		"V4.6.7-SNAPSHOT",
+		"V4.6.7",
+		"V4.6.8-SNAPSHOT",
+		"V4.6.8",
+		"V4.6.9-SNAPSHOT",
+		"V4.6.9",
+		"V4.7.0-SNAPSHOT",
+		"V4.7.0",
+		"V4.7.1-SNAPSHOT",
+		"V4.7.1",
+		"V4.7.2-SNAPSHOT",
+		"V4.7.2",
+		"V4.7.3-SNAPSHOT",
+		"V4.7.3",
+		"V4.7.4-SNAPSHOT",
+		"V4.7.4",
+		"V4.7.5-SNAPSHOT",
+		"V4.7.5",
+		"V4.7.6-SNAPSHOT",
+		"V4.7.6",
+		"V4.7.7-SNAPSHOT",
+		"V4.7.7",
+		"V4.7.8-SNAPSHOT",
+		"V4.7.8",
+		"V4.7.9-SNAPSHOT",
+		"V4.7.9",
+		"V4.8.0-SNAPSHOT",
+		"V4.8.0",
+		"V4.8.1-SNAPSHOT",
+		"V4.8.1",
+		"V4.8.2-SNAPSHOT",
+		"V4.8.2",
+		"V4.8.3-SNAPSHOT",
+		"V4.8.3",
+		"V4.8.4-SNAPSHOT",
+		"V4.8.4",
+		"V4.8.5-SNAPSHOT",
+		"V4.8.5",
+		"V4.8.6-SNAPSHOT",
+		"V4.8.6",
+		"V4.8.7-SNAPSHOT",
+		"V4.8.7",
+		"V4.8.8-SNAPSHOT",
+		"V4.8.8",
+		"V4.8.9-SNAPSHOT",
+		"V4.8.9",
+		"V4.9.0-SNAPSHOT",
+		"V4.9.0",
+		"V4.9.1-SNAPSHOT",
+		"V4.9.1",
+		"V4.9.2-SNAPSHOT",
+		"V4.9.2",
+		"V4.9.3-SNAPSHOT",
+		"V4.9.3",
+		"V4.9.4-SNAPSHOT",
+		"V4.9.4",
+		"V4.9.5-SNAPSHOT",
+		"V4.9.5",
+		"V4.9.6-SNAPSHOT",
+		"V4.9.6",
+		"V4.9.7-SNAPSHOT",
+		"V4.9.7",
+		"V4.9.8-SNAPSHOT",
+		"V4.9.8",
+		"V4.9.9-SNAPSHOT",
+		"V4.9.9",
+		"V5.0.0-SNAPSHOT",
+		"V5.0.0",
+		"V5.0.1-SNAPSHOT",
+		"V5.0.1",
+		"V5.0.2-SNAPSHOT",
+		"V5.0.2",
+		"V5.0.3-SNAPSHOT",
+		"V5.0.3",
+		"V5.0.4-SNAPSHOT",
+		"V5.0.4",
+		"V5.0.5-SNAPSHOT",
+		"V5.0.5",
+		"V5.0.6-SNAPSHOT",
+		"V5.0.6",
+		"V5.0.7-SNAPSHOT",
+		"V5.0.7",
+		"V5.0.8-SNAPSHOT",
+		"V5.0.8",
+		"V5.0.9-SNAPSHOT",
+		"V5.0.9",
+		"V5.1.0-SNAPSHOT",
+		"V5.1.0",
+		"V5.1.1-SNAPSHOT",
+		"V5.1.1",
+		"V5.1.2-SNAPSHOT",
+		"V5.1.2",
+		"V5.1.3-SNAPSHOT",
+		"V5.1.3",
+		"V5.1.4-SNAPSHOT",
+		"V5.1.4",
+		"V5.1.5-SNAPSHOT",
+		"V5.1.5",
+		"V5.1.6-SNAPSHOT",
+		"V5.1.6",
+		"V5.1.7-SNAPSHOT",
+		"V5.1.7",
+		"V5.1.8-SNAPSHOT",
+		"V5.1.8",
+		"V5.1.9-SNAPSHOT",
+		"V5.1.9",
+		"V5.2.0-SNAPSHOT",
+		"V5.2.0",
+		"V5.2.1-SNAPSHOT",
+		"V5.2.1",
+		"V5.2.2-SNAPSHOT",
+		"V5.2.2",
+		"V5.2.3-SNAPSHOT",
+		"V5.2.3",
+		"V5.2.4-SNAPSHOT",
+		"V5.2.4",
+		"V5.2.5-SNAPSHOT",
+		"V5.2.5",
+		"V5.2.6-SNAPSHOT",
+		"V5.2.6",
+		"V5.2.7-SNAPSHOT",
+		"V5.2.7",
+		"V5.2.8-SNAPSHOT",
+		"V5.2.8",
+		"V5.2.9-SNAPSHOT",
+		"V5.2.9",
+		"V5.3.0-SNAPSHOT",
+		"V5.3.0",
+		"V5.3.1-SNAPSHOT",
+		"V5.3.1",
+		"V5.3.2-SNAPSHOT",
+		"V5.3.2",
+		"V5.3.3-SNAPSHOT",
+		"V5.3.3",
+		"V5.3.4-SNAPSHOT",
+		"V5.3.4",
+		"V5.3.5-SNAPSHOT",
+		"V5.3.5",
+		"V5.3.6-SNAPSHOT",
+		"V5.3.6",
+		"V5.3.7-SNAPSHOT",
+		"V5.3.7",
+		"V5.3.8-SNAPSHOT",
+		"V5.3.8",
+		"V5.3.9-SNAPSHOT",
+		"V5.3.9",
+		"V5.4.0-SNAPSHOT",
+		"V5.4.0",
+		"V5.4.1-SNAPSHOT",
+		"V5.4.1",
+		"V5.4.2-SNAPSHOT",
+		"V5.4.2",
+		"V5.4.3-SNAPSHOT",
+		"V5.4.3",
+		"V5.4.4-SNAPSHOT",
+		"V5.4.4",
+		"V5.4.5-SNAPSHOT",
+		"V5.4.5",
+		"V5.4.6-SNAPSHOT",
+		"V5.4.6",
+		"V5.4.7-SNAPSHOT",
+		"V5.4.7",
+		"V5.4.8-SNAPSHOT",
+		"V5.4.8",
+		"V5.4.9-SNAPSHOT",
+		"V5.4.9",
+		"V5.5.0-SNAPSHOT",
+		"V5.5.0",
+		"V5.5.1-SNAPSHOT",
+		"V5.5.1",
+		"V5.5.2-SNAPSHOT",
+		"V5.5.2",
+		"V5.5.3-SNAPSHOT",
+		"V5.5.3",
+		"V5.5.4-SNAPSHOT",
+		"V5.5.4",
+		"V5.5.5-SNAPSHOT",
+		"V5.5.5",
+		"V5.5.6-SNAPSHOT",
+		"V5.5.6",
+		"V5.5.7-SNAPSHOT",
+		"V5.5.7",
+		"V5.5.8-SNAPSHOT",
+		"V5.5.8",
+		"V5.5.9-SNAPSHOT",
+		"V5.5.9",
+		"V5.6.0-SNAPSHOT",
+		"V5.6.0",
+		"V5.6.1-SNAPSHOT",
+		"V5.6.1",
+		"V5.6.2-SNAPSHOT",
+		"V5.6.2",
+		"V5.6.3-SNAPSHOT",
+		"V5.6.3",
+		"V5.6.4-SNAPSHOT",
+		"V5.6.4",
+		"V5.6.5-SNAPSHOT",
+		"V5.6.5",
+		"V5.6.6-SNAPSHOT",
+		"V5.6.6",
+		"V5.6.7-SNAPSHOT",
+		"V5.6.7",
+		"V5.6.8-SNAPSHOT",
+		"V5.6.8",
+		"V5.6.9-SNAPSHOT",
+		"V5.6.9",
+		"V5.7.0-SNAPSHOT",
+		"V5.7.0",
+		"V5.7.1-SNAPSHOT",
+		"V5.7.1",
+		"V5.7.2-SNAPSHOT",
+		"V5.7.2",
+		"V5.7.3-SNAPSHOT",
+		"V5.7.3",
+		"V5.7.4-SNAPSHOT",
+		"V5.7.4",
+		"V5.7.5-SNAPSHOT",
+		"V5.7.5",
+		"V5.7.6-SNAPSHOT",
+		"V5.7.6",
+		"V5.7.7-SNAPSHOT",
+		"V5.7.7",
+		"V5.7.8-SNAPSHOT",
+		"V5.7.8",
+		"V5.7.9-SNAPSHOT",
+		"V5.7.9",
+		"V5.8.0-SNAPSHOT",
+		"V5.8.0",
+		"V5.8.1-SNAPSHOT",
+		"V5.8.1",
+		"V5.8.2-SNAPSHOT",
+		"V5.8.2",
+		"V5.8.3-SNAPSHOT",
+		"V5.8.3",
+		"V5.8.4-SNAPSHOT",
+		"V5.8.4",
+		"V5.8.5-SNAPSHOT",
+		"V5.8.5",
+		"V5.8.6-SNAPSHOT",
+		"V5.8.6",
+		"V5.8.7-SNAPSHOT",
+		"V5.8.7",
+		"V5.8.8-SNAPSHOT",
+		"V5.8.8",
+		"V5.8.9-SNAPSHOT",
+		"V5.8.9",
+		"V5.9.0-SNAPSHOT",
+		"V5.9.0",
+		"V5.9.1-SNAPSHOT",
+		"V5.9.1",
+		"V5.9.2-SNAPSHOT",
+		"V5.9.2",
+		"V5.9.3-SNAPSHOT",
+		"V5.9.3",
+		"V5.9.4-SNAPSHOT",
+		"V5.9.4",
+		"V5.9.5-SNAPSHOT",
+		"V5.9.5",
+		"V5.9.6-SNAPSHOT",
+		"V5.9.6",
+		"V5.9.7-SNAPSHOT",
+		"V5.9.7",
+		"V5.9.8-SNAPSHOT",
+		"V5.9.8",
+		"V5.9.9-SNAPSHOT",
+		"V5.9.9",
+		"HIGHER-VERSION",
+	}
+)
+
+const CURRENT_VERSION = V4_5_0
+const CURRENT_LANGUAGE string = "JAVA"

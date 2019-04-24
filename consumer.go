@@ -254,8 +254,8 @@ func (c *DefaultConsumer) pullMessage(pullRequest *PullRequest) {
 		remotingCommand.Code = PullMsg
 		remotingCommand.Opaque = currOpaque
 		remotingCommand.Flag = 0
-		remotingCommand.Language = "JAVA"
-		remotingCommand.Version = 79
+		remotingCommand.Language = CURRENT_LANGUAGE
+		remotingCommand.Version = CURRENT_VERSION
 
 		remotingCommand.ExtFields = requestHeader
 
