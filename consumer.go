@@ -170,6 +170,8 @@ func (c *DefaultConsumer) pullMessage(pullRequest *PullRequest) {
 	}
 
 	requestHeader := new(PullMessageRequestHeader)
+
+	requestHeader.MaxMsgNums = 1024
 	requestHeader.ConsumerGroup = pullRequest.consumerGroup
 	requestHeader.Topic = pullRequest.messageQueue.topic
 	requestHeader.QueueId = pullRequest.messageQueue.queueId
