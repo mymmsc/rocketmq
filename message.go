@@ -2,7 +2,8 @@ package rocketmq
 
 import (
 	"bytes"
-	"compress/zlib"
+	//"compress/zlib"
+	"github.com/klauspost/compress/zlib"
 	"encoding/binary"
 	"encoding/json"
 	"errors"
