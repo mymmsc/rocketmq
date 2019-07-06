@@ -216,7 +216,7 @@ func (c *DefaultConsumer) pullMessage(pullRequest *PullRequest) {
 				}
 			} else if responseCommand.Code == PullNotFound {
 			} else if responseCommand.Code == PullRetryImmediately || responseCommand.Code == PullOffsetMoved {
-				fmt.Printf("pull message error,code=%d,request=%v", responseCommand.Code, requestHeader)
+				fmt.Printf("pull message error,code=%d,request=%v\n", responseCommand.Code, requestHeader)
 				var err error
 				pullResult, ok := responseCommand.ExtFields.(map[string]interface{})
 				if ok {

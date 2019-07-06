@@ -124,10 +124,10 @@ func decodeMessage(data []byte) []*MessageExt {
 			json.Unmarshal(properties, &propertiesMap)
 		}
 
-		if magicCode != -626843481 {
+		/*if magicCode != -626843481 {
 			fmt.Printf("magic code is error %d", magicCode)
 			return nil
-		}
+		}*/
 
 		msg.Topic = string(topic)
 		msg.QueueId = queueId
